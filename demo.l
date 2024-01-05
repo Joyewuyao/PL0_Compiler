@@ -15,17 +15,17 @@ void print_token(){
 
 "//".*\n {};
 
-"begin" { print_token(); return BEGIN_BODY;}
-"end" {print_token(); return END_BODY;}
-"const" {print_token(); return CONST;}
-"var" {print_token(); return VAR;}
-"procedure" { print_token(); return PROC;}
-"call" print_token(); {return CALL;}
-"if" {print_token(); return IF;}
-"then" {print_token(); return THEN;}
-"while" {print_token(); return WHILE;}
-"do" {print_token(); return DO;}
-"odd" {print_token(); return ODD;}
+"BEGIN" { print_token(); return BEGIN_BODY;}
+"END" {print_token(); return END_BODY;}
+"CONST" {print_token(); return CONST;}
+"VAR" {print_token(); return VAR;}
+"PROGRAM" { print_token(); return PROGRAM;}
+
+"IF" {print_token(); return IF;}
+"THEN" {print_token(); return THEN;}
+"WHILE" {print_token(); return WHILE;}
+"DO" {print_token(); return DO;}
+
 
 [1-9][0-9]*|"0" {
 	print_token();
@@ -44,13 +44,13 @@ void print_token(){
 ":=" { print_token(); return ASSIGN; }
 "<>" {print_token(); return NE;}
 "<=" {print_token(); return LE; }
-"<=" {print_token(); return GE; }
+">=" {print_token(); return GE; }
 
 "=" {print_token(); return EQ; }
 "<" {print_token(); return LT; }
 ">" {print_token(); return GT; }
 
-"." {print_token(); return DOT;}
+
 "," {print_token(); return COMMA;}
 ";" {print_token(); return SEMICOLON;}
 "+" {print_token(); return PLUS;}

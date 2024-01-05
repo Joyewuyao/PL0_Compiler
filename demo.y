@@ -11,32 +11,30 @@ extern int yyerror(const char * format,...);
 %union{
 	int num;
 
-	/* Ğ´string id±àÒë²»¹ı
-	   µ«ÊÇĞ´string* idÊÇ¿ÉÒÔµÄ
+	/* å†™string idç¼–è¯‘ä¸è¿‡
+	   ä½†æ˜¯å†™string* idæ˜¯å¯ä»¥çš„
 	   string* id;
 	*/
 	char *id;
 }
 
-//¹Ø¼ü×Ö¶¨Òå,ÓÉÓÚBEGINÊÇbisonµÄ¹Ø¼ü×Ö,ËùÒÔ±ØĞë¸Ä¸öÃû×Ö!!
+//å…³é”®å­—å®šä¹‰,ç”±äºBEGINæ˜¯bisonçš„å…³é”®å­—,æ‰€ä»¥å¿…é¡»æ”¹ä¸ªåå­—!!
 %token BEGIN_BODY,END_BODY 
-%token CONST,VAR,PROC 
-%token CALL
-%token ODD 
+%token CONST,VAR,PROGRAM 
 %token IF,THEN
 %token WHILE,DO
 
-//ÔËËã·ûºÍ·Ö¸ô·û
+//è¿ç®—ç¬¦å’Œåˆ†éš”ç¬¦
 //%token NUM 
 //%token ID 
 
 %token <num> NUM
 %token<id> ID
 
-%token PLUS,MINUS,MUL,DIV         //ËãÊõÔËËã·û
-%token EQ,NE,LT,LE,GT,GE   //±È½ÏÔËËã·û
-%token LPAREN,RPAREN   //×óÓÒÀ¨ºÅ
-%token COMMA,SEMICOLON,DOT,ASSIGN
+%token PLUS,MINUS,MUL,DIV         //ç®—æœ¯è¿ç®—ç¬¦
+%token EQ,NE,LT,LE,GT,GE   //æ¯”è¾ƒè¿ç®—ç¬¦
+%token LPAREN,RPAREN   //å·¦å³æ‹¬å·
+%token COMMA,SEMICOLON,ASSIGN
 
 //%start program
 //%start factor
@@ -50,15 +48,33 @@ extern int yyerror(const char * format,...);
 
 %%
 program:
-	{ create_program(); } subprog DOT { end_program();}
+	{ create_program(); } 
+	proc_decl
+	{ end_program();}
 	;
+
+proc_decl:
+	proc_head
+	 subprog
+	;
+
+proc_head:
+	PROGRAM ID
+	{
+		create_proc($2);
+	}
+	;
+
 
 subprog:
 	const_decl_part 
 	var_decl_part 
-	proc_decl_part {begin_proc_code();} 
+	{begin_proc_code();}
 	statement {end_proc();}
 	;
+
+
+
 
 const_decl_part:
 	const_decl
@@ -75,7 +91,7 @@ const_list:
 	;
 
 const_def:
-	ID EQ NUM {
+	ID ASSIGN NUM {
 		add_const_item($1,$3);
 	}
 	;
@@ -95,26 +111,7 @@ id_list:
 	;
 
 
-proc_decl_part:
-	proc_list
-	|
-	;
 
-proc_list:
-	proc_decl
-	|proc_list proc_decl
-	;
-
-proc_decl:
-	proc_head subprog SEMICOLON;
-	;
-
-proc_head:
-	PROC ID SEMICOLON
-	{
-		create_proc($2);
-	}
-	;
 
 statements:
 	statement
@@ -123,7 +120,6 @@ statements:
 
 statement:
 	 assign_stat
-	|call_stat
 	|compound_stat
 	|if_stat
 	|while_stat
@@ -133,12 +129,6 @@ statement:
 assign_stat:
 	ID	ASSIGN expr{
 		write_var($1);
-	}
-	;
-
-call_stat:
-	CALL ID{
-		call($2);
 	}
 	;
 
@@ -165,10 +155,7 @@ while_stat:
 
 
 cond:
-	ODD expr{
-		gen(OPR, 0, 6, "OPR ODD");
-	}
-	|expr EQ expr{
+	expr EQ expr{
 		gen(OPR, 0, 8, "OPR == ");
 	}
 	|expr NE expr
@@ -216,7 +203,7 @@ term:
 		gen(OPR,0,4,"OPR MULTI");	
 	}
 	|term DIV factor{
-		gen(OPR,0,4,"OPR DIV");	
+		gen(OPR,0,5,"OPR DIV");	
 	}
 	;
 

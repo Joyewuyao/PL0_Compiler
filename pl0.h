@@ -79,8 +79,8 @@ struct Block {
 	bool get_const_value(const string& name,int &value)const;
 	bool get_var_offset(const string& name,int &offset)const;
 
-	set<int> ref_addrs; //需要用到本函数首地址的call语句列表
-	void fill_addr()const;  //回填本函数的首地址
+	set<int> ref_addrs; //??????????????????call????б?
+	void fill_addr()const;  //??????????????
 	void add_ref(int addr) {
 		ref_addrs.insert(addr);
 	}
@@ -104,7 +104,6 @@ void load(const char* name);
 
 void write_var(const char* name);
 
-void call(const char* proc_name);
 
 void after_if_conditon();
 void after_if_body();
