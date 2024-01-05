@@ -1,7 +1,7 @@
 
-	//start of proc add with 2 vars has level 1 start from addr 0
+	//start of proc add with 0 vars has level 1 start from addr 0
 	NO.      f     l    a
-	0       INT    0    5
+	0       INT    0    3
 	1       LIT    0    1	//push number 1 to stack
 	2       STO    0    3	//pop top to x @ add[0] at level 1 
 	3       LIT    0    2	//push number 2 to stack
@@ -28,9 +28,3 @@
 	24      OPR    0    2	//OPR PLUS
 	25      STO    0    4	//pop top to y @ add[1] at level 1 
 	26      OPR    0    0	//return from proc add 
-
-	//start of proc _main with 0 vars has level 0 start from addr 27
-	NO.      f     l    a
-	27      INT    0    3
-	28      CAL    0    0	//call proc add
-	29      OPR    0    0	//return from proc _main 

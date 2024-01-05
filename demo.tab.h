@@ -1,8 +1,10 @@
-/* A Bison parser, made by GNU Bison 2.7.  */
 
-/* Bison interface for Yacc-like parsers in C
+/* A Bison parser, made by GNU Bison 2.4.1.  */
+
+/* Skeleton interface for Bison's Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+   Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,15 +32,6 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_DEMO_TAB_H_INCLUDED
-# define YY_YY_DEMO_TAB_H_INCLUDED
-/* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -50,52 +43,52 @@ extern int yydebug;
      END_BODY = 259,
      CONST = 260,
      VAR = 261,
-     PROC = 262,
-     CALL = 263,
-     ODD = 264,
-     IF = 265,
-     THEN = 266,
-     WHILE = 267,
-     DO = 268,
-     NUM = 269,
-     ID = 270,
-     PLUS = 271,
-     MINUS = 272,
-     MUL = 273,
-     DIV = 274,
-     EQ = 275,
-     NE = 276,
-     LT = 277,
-     LE = 278,
-     GT = 279,
-     GE = 280,
-     LPAREN = 281,
-     RPAREN = 282,
-     COMMA = 283,
-     SEMICOLON = 284,
-     DOT = 285,
-     ASSIGN = 286
+     PROGRAM = 262,
+     IF = 263,
+     THEN = 264,
+     WHILE = 265,
+     DO = 266,
+     NUM = 267,
+     ID = 268,
+     PLUS = 269,
+     MINUS = 270,
+     MUL = 271,
+     DIV = 272,
+     EQ = 273,
+     NE = 274,
+     LT = 275,
+     LE = 276,
+     GT = 277,
+     GE = 278,
+     LPAREN = 279,
+     RPAREN = 280,
+     COMMA = 281,
+     SEMICOLON = 282,
+     ASSIGN = 283
    };
 #endif
+
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
-/* Line 2058 of yacc.c  */
+
+/* Line 1676 of yacc.c  */
 #line 11 "demo.y"
 
 	int num;
 
-	/* 写string id编译不过
-	   但是写string* id是可以的
+	/* 鍐檚tring id缂栬瘧涓嶈繃
+	   浣嗘槸鍐檚tring* id鏄彲浠ョ殑
 	   string* id;
 	*/
 	char *id;
 
 
-/* Line 2058 of yacc.c  */
-#line 99 "demo.tab.h"
+
+/* Line 1676 of yacc.c  */
+#line 92 "demo.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -104,18 +97,4 @@ typedef union YYSTYPE
 
 extern YYSTYPE yylval;
 
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void *YYPARSE_PARAM);
-#else
-int yyparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
-int yyparse (void);
-#else
-int yyparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_YY_DEMO_TAB_H_INCLUDED  */
